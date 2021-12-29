@@ -1,10 +1,12 @@
 import React from "react";
 import Loading from "../components/Loading";
 import { useParams, Link } from "react-router-dom";
+import { useGlobalContext } from "../context";
 
 const url = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
 const SingleCocktail = () => {
+  const { setSearchTerm } = useGlobalContext();
   const { id } = useParams();
   const [loading, setLoading] = React.useState(false);
   const [cocktail, setCocktail] = React.useState(null);
@@ -63,7 +65,11 @@ const SingleCocktail = () => {
     cocktail;
   return (
     <section className="section cocktail-section">
-      <Link to="/" className="btn btn-primary">
+      <Link
+        to="/"
+        onClick={() => setSearchTerm("a")}
+        className="btn btn-primary"
+      >
         back home
       </Link>
       <h2 className="section-title">{name}</h2>
